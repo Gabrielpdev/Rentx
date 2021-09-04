@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import Header from '../../components/Header';
 import Car from '../../components/Car';
 
-import { Container, Title } from './styles';
+import { Container, CarList } from './styles';
 
 interface HomeProps {
   children: ReactNode;
@@ -24,7 +24,11 @@ export function Home() {
     <Container>
       <Header title="Total de 7 carros" />
 
-      <Car data={carData} />
+      <CarList 
+        data={[1,2,3,4,5,6]}
+        keyExtractor={(item) => String(item)}
+        renderItem={() => <Car data={carData} />}
+      />
     </Container>
   );
 };
