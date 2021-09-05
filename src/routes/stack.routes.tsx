@@ -3,7 +3,15 @@ import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const { Navigator, Screen } = createNativeStackNavigator();
+export type StackParamList = {
+  Home: undefined;
+  CarDetails: undefined;
+  Scheduling: undefined;
+  SchedulingDetails: undefined;
+  SchedulingComplete: undefined;
+};
+
+const { Navigator, Screen } = createNativeStackNavigator<StackParamList>();
 
 import { Home } from '../screens/Home'
 import { CarDetails } from '../screens/CarDetails'
@@ -13,7 +21,7 @@ import { SchedulingComplete } from '../screens/SchedulingComplete'
 
 export function StackRoutes(){
   return(
-    <Navigator screenOptions={{ headerShown: false }} >
+    <Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
       <Screen name="Home" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />

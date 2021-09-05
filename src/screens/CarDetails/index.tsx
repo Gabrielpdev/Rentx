@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
@@ -13,6 +14,8 @@ import forceSVG from '../../assets/force.svg'
 import gasolineSVG from '../../assets/gasoline.svg'
 import exchangeSVG from '../../assets/exchange.svg'
 import peopleSVG from '../../assets/people.svg'
+
+type CarDetailsScreenProp = NativeStackNavigationProp<StackParamList, 'Home'>;
 
 import { 
   Container, 
@@ -30,13 +33,10 @@ import {
   About,
   Footer,
 } from './styles';
-
-interface CarDetailsProps {
-  children: ReactNode;
-}
+import { StackParamList } from '../../routes/stack.routes';
 
 export function CarDetails() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<CarDetailsScreenProp>();
   
   function handleConfirmRental(){
     navigation.navigate('Scheduling');

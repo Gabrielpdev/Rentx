@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
 
@@ -7,6 +8,7 @@ import { Button } from '../../components/Button';
 import { Calendar } from '../../components/Calendar';
 
 import ArrowSvg from '../../assets/arrow.svg';
+import { StackParamList } from '../../routes/stack.routes';
 
 import { 
   Container, 
@@ -21,9 +23,11 @@ import {
   Footer,
 } from './styles';
 
+type SchedulingScreenProp = NativeStackNavigationProp<StackParamList, 'Home'>;
+
 export function Scheduling() {
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<SchedulingScreenProp>();
 
   function handleConfirmRental(){
     navigation.navigate('SchedulingDetails');

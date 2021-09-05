@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -16,6 +17,8 @@ import forceSVG from '../../assets/force.svg'
 import gasolineSVG from '../../assets/gasoline.svg'
 import exchangeSVG from '../../assets/exchange.svg'
 import peopleSVG from '../../assets/people.svg'
+
+import { StackParamList } from '../../routes/stack.routes';
 
 import { 
   Container, 
@@ -43,13 +46,12 @@ import {
   RentalPriceTotal,
 } from './styles';
 
-interface CarDetailsProps {
-  children: ReactNode;
-}
+type SchedulingDetailsScreenProp = NativeStackNavigationProp<StackParamList, 'Home'>;
+
 
 export function SchedulingDetails() {
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<SchedulingDetailsScreenProp>();
 
   function handleConfirmRental(){
     navigation.navigate('SchedulingComplete');

@@ -1,17 +1,18 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import { StackParamList } from '../../routes/stack.routes';
 
 import Header from '../../components/Header';
 import Car from '../../components/Car';
 
 import { Container, CarList } from './styles';
 
-interface HomeProps {
-  children: ReactNode;
-}
+type homeScreenProp = NativeStackNavigationProp<StackParamList, 'Home'>;
 
 export function Home() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<homeScreenProp>();
   
   const carData = {
     brand: 'Ford',

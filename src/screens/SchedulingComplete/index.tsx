@@ -1,8 +1,10 @@
 import React from 'react';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar, useWindowDimensions } from 'react-native';
 
 import { ConfirmButton } from '../../components/ConfirmButton';
+import { StackParamList } from '../../routes/stack.routes';
 
 import { 
   Container,
@@ -15,8 +17,10 @@ import {
 import LogoSvg from '../../assets/logo_background_gray.svg';
 import DoneSvg from '../../assets/done.svg';
 
+type SchedulingCompleteScreenProp = NativeStackNavigationProp<StackParamList, 'Home'>;
+
 export function SchedulingComplete() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<SchedulingCompleteScreenProp>();
   const { width } = useWindowDimensions();
 
   function handleConfirmRental(){
