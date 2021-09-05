@@ -1,11 +1,14 @@
 import React, { ReactNode } from 'react';
-import { StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { StatusBar } from 'react-native';
+import { Feather } from '@expo/vector-icons'
 
+import { Button } from '../../components/Button';
 import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
-import { Button } from '../../components/Button';
 
 import speedSVG from '../../assets/speed.svg'
 import accelerationSVG from '../../assets/acceleration.svg'
@@ -27,21 +30,31 @@ import {
   Period,
   Price,
   Accessories,
-  About,
   Footer,
+  RentalPeriod,
+  CalendarIcon,
+  DateTitle,
+  DateInfo,
+  DateValue,
+  RentalPrice,
+  RentalPriceLabel,
+  RentalPriceDetails,
+  RentalPriceQuota,
+  RentalPriceTotal,
 } from './styles';
 
 interface CarDetailsProps {
   children: ReactNode;
 }
 
-export function CarDetails() {
+export function SchedulingDetails() {
+  const theme = useTheme();
   const navigation = useNavigation();
-  
+
   function handleConfirmRental(){
-    navigation.navigate('Scheduling');
+    navigation.navigate('SchedulingComplete');
   }
-  
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
@@ -76,17 +89,44 @@ export function CarDetails() {
           <Accessory name="Auto" icon={exchangeSVG} />
           <Accessory name="2 Pessoas" icon={peopleSVG} />
         </Accessories> 
+      
+        <RentalPeriod>
+          <CalendarIcon>
+            <Feather 
+              name="calendar"
+              size={RFValue(24)}
+              color={theme.colors.shape}
+            />
+          </CalendarIcon>
 
+          <DateInfo>
+            <DateTitle>DE</DateTitle>
+            <DateValue>10/10/2020</DateValue>
+          </DateInfo>
 
-        <About>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec euismod, nisi vel consectetur euismod, nisi nisi
-          fermentum nisi, euismod euismod nisi nisi euismod.
-        </About>
+          <Feather 
+              name="chevron-right"
+              size={RFValue(10)}
+              color={theme.colors.text}
+            />
+
+          <DateInfo>
+            <DateTitle>DE</DateTitle>
+            <DateValue>10/10/2020</DateValue>
+          </DateInfo>
+        </RentalPeriod>
+        
+        <RentalPrice>
+          <RentalPriceLabel>TOTAL</RentalPriceLabel>
+          <RentalPriceDetails>
+            <RentalPriceQuota>R$ 580 x3 diárias</RentalPriceQuota>
+            <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
+          </RentalPriceDetails>
+        </RentalPrice>
       </Content>
 
       <Footer>
-        <Button title="Escolher periodo do aluguel" onPress={handleConfirmRental}/>
+        <Button title="Alugar agora" color={theme.colors.success} onPress={handleConfirmRental} />
       </Footer>
     </Container>
   );

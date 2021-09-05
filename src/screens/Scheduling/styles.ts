@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
+import { BackButton } from '../../components/BackButton';
 interface DateValueProps {
   selected: boolean;
 }
@@ -18,7 +19,14 @@ export const Header = styled.View`
 
   justify-content: center;
   padding: 25px;
-  padding-top: ${getStatusBarHeight() + 30}px;
+  padding-top: ${getStatusBarHeight() + 60}px;
+`;
+
+export const PositionBackButton = styled(BackButton)`
+  position: absolute;
+  left: 25px;
+  top: 0%;
+  margin-top: ${getStatusBarHeight() + 30}px;
 `;
 
 export const Title = styled.Text`
