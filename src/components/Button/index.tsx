@@ -7,12 +7,19 @@ interface ButtonProps {
   title: string;
   color?: string;
   onPress: () => void;
+  enabled?: boolean;
 }
 
-export function Button({ title, color, onPress, ...rest }: ButtonProps) {
+export function Button({ title, color, onPress, enabled = true, ...rest }: ButtonProps) {
   const theme = useTheme();
   return (
-    <Container color={color ? color : theme.colors.main} onPress={onPress} {...rest}>
+    <Container 
+      color={color ? color : theme.colors.main} 
+      onPress={onPress}
+      enabled={enabled}
+      style={{ opacity: enabled ? 1 : 0.5 }}
+      {...rest}
+      >
       <Title>{title}</Title>
     </Container>
   );

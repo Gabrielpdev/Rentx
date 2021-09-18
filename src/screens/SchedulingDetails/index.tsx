@@ -78,7 +78,9 @@ export function SchedulingDetails() {
     try{
       await api.post('schedules_byuser', {
         user_id: 1,
-        car
+        car,
+        startDate: format(addDays(new Date(dates[0]), 1), 'yyyy/MM/dd'),
+        endDate: format(addDays(new Date(dates[dates.length - 1]), 1), 'yyyy/MM/dd'),
       })
 
       await api.put(`/schedules_bycars/${car.id}`, {

@@ -49,14 +49,10 @@ export function Scheduling() {
   const [ rentalPeriod, setRentalPeriod ] = useState<RentalPeriod>({} as RentalPeriod);
 
   function handleConfirmRental(){
-    if(!rentalPeriod.start || !rentalPeriod.end){
-      Alert.alert('Aviso', 'Selecione um período para a locação');
-    }else {
-      navigation.navigate('SchedulingDetails', {
-        car,
-        dates: Object.keys(marketDate)
-      });
-    }
+    navigation.navigate('SchedulingDetails', {
+      car,
+      dates: Object.keys(marketDate)
+    });
   }
 
   function handleDateChange(date: DayProps){
@@ -107,7 +103,7 @@ export function Scheduling() {
 
           <DateInfo>
             <DateTitle>ATÉ</DateTitle>
-            <DateValue selected={!!rentalPeriod.startFormatted}>
+            <DateValue selected={!!rentalPeriod.endFormatted}>
               {rentalPeriod.endFormatted}
             </DateValue>
           </DateInfo>
@@ -122,7 +118,11 @@ export function Scheduling() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" onPress={handleConfirmRental}/>
+        <Button 
+          enabled={!!rentalPeriod.startFormatted} 
+          title="Confirmar" 
+          onPress={handleConfirmRental}
+        />
       </Footer>
     </Container>
   );

@@ -9,6 +9,7 @@ export type StackParamList = {
   Scheduling: undefined;
   SchedulingDetails: undefined;
   SchedulingComplete: undefined;
+  MyCars: undefined;
 };
 
 const { Navigator, Screen } = createNativeStackNavigator<StackParamList>();
