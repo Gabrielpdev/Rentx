@@ -1,17 +1,19 @@
 import React, { useEffect, useState }  from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons'
 
 import { StackParamList } from '../../routes/stack.routes';
 
 import Header from '../../components/Header';
 import Car from '../../components/Car';
 
-import { Container, CarList } from './styles';
+import { Container, CarList, MyCarsButton } from './styles';
 import { api } from '../../service/api';
 
 import { CarDTO } from '../../dots/CarsDTO';
 import { Loading } from '../../components/Loading';
+import theme from '../../styles/theme';
 
 type homeScreenProp = NativeStackNavigationProp<StackParamList, 'Home'>;
 
@@ -23,6 +25,10 @@ export function Home() {
 
   function handleCarDetails(car: CarDTO) {
     navigation.navigate('CarDetails', { car });
+  }
+
+  function handleOpenMyCars() {
+    navigation.navigate('MyCars');
   }
 
   useEffect(() => {
@@ -54,6 +60,16 @@ export function Home() {
           renderItem={({ item }) => <Car data={item} onPress={() => handleCarDetails(item)} />}
         />
       )}
+
+      <MyCarsButton 
+        onPress={handleOpenMyCars}
+      >
+        <Ionicons 
+          name="ios-car-sport"
+          size={32}
+          color={theme.colors.shape}
+        />
+      </MyCarsButton>
     </Container>
   );
 };
