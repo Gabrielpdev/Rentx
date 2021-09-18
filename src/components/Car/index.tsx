@@ -24,6 +24,7 @@ interface CarProps extends RectButtonProps {
 
 function Car({ data, ...rest }: CarProps) {
   const MotorIcon = getAccessoryIcon(data.fuel_type);
+  
   return (
     <Container {...rest}>
       <Details>
