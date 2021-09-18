@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -8,35 +8,52 @@ import Header from '../../components/Header';
 import Car from '../../components/Car';
 
 import { Container, CarList } from './styles';
+import { api } from '../../service/api';
+
+import { CarDTO } from '../../dots/CarsDTO';
+import { Loading } from '../../components/Loading';
 
 type homeScreenProp = NativeStackNavigationProp<StackParamList, 'Home'>;
 
 export function Home() {
   const navigation = useNavigation<homeScreenProp>();
-  
-  const carData = {
-    brand: 'Ford',
-    name: 'Fiesta',
-    rent: {
-      period: 'Ao dia',
-      price: 10.000,
-    },
-    thumbnail: 'https://www.kindpng.com/picc/m/579-5791907_-t-audi-png-transparent-png.png'
-  }
+
+  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [loading, setLoading] = useState(false);
 
   function handleCarDetails() {
     navigation.navigate('CarDetails');
   }
 
+  useEffect(() => {
+    async function loadCars(){
+      setLoading(true);
+      try{
+        const { data } = await api.get('/cars')
+        setCars(data);
+      }catch(error){
+        console.log(error)
+      }finally{
+        setLoading(false);
+      }
+    }
+
+    loadCars();
+  },[])
+
   return (
     <Container>
       <Header title="Total de 7 carros" />
 
-      <CarList 
-        data={[1,2,3,4,5,6]}
-        keyExtractor={(item) => String(item)}
-        renderItem={() => <Car data={carData} onPress={handleCarDetails} />}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <CarList 
+          data={cars}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => <Car data={item} onPress={handleCarDetails} />}
+        />
+      )}
     </Container>
   );
 };

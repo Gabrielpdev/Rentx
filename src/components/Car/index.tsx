@@ -15,22 +15,14 @@ import {
  } from './styles';
 
 import GasolineSVG from '../../assets/gasoline.svg';
-
-interface CarData {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  };
-  thumbnail: string;
-}
-
+import { CarDTO } from '../../dots/CarsDTO';
 interface CarProps extends RectButtonProps {
-  data: CarData;
+  data: CarDTO;
 }
+
 
 function Car({ data, ...rest }: CarProps) {
+  console.log(data)
   return (
     <Container {...rest}>
       <Details>
