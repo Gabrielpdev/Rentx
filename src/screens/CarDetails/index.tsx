@@ -41,7 +41,7 @@ export function CarDetails() {
   const { car } = params as Params;
 
   function handleConfirmRental(){
-    navigation.navigate('Scheduling');
+    navigation.navigate('Scheduling', { car });
   }
   
   return (
