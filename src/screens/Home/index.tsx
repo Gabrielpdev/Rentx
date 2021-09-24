@@ -49,7 +49,7 @@ export function Home() {
 
   return (
     <Container>
-      <Header title="Total de 7 carros" />
+      <Header title={`Total de ${cars.length} carros`} />
 
       {loading ? (
         <Loading />
